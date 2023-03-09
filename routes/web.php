@@ -20,11 +20,14 @@ Route::get('/', function () {
 Route::get('/posts/{post}', function ($slug) {
     $path = __DIR__ . "/../resources/posts/{$slug}.html";
 
+    // Check if the file exists
     if(!file_exists($path)) {
         abort(404);
     }
 
-    $post = file_get_contents($path);
+    $post = cache()->remember("posts.{$slug}", 1200, fn() =>
+        file_get_contents($path)
+    );
 
     return view('post', [
         'post' => $post
