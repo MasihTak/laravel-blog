@@ -12,6 +12,7 @@
     "devDependencies": {
         "axios": "^0.25",
         "laravel-mix": "^6.0.6",
-        "sass": "^1.62.1"
+        "sass": "^1.62.1",
+        "vite": "^4.3.8"
     }
 }
