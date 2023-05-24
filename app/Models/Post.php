@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 
 class Post
@@ -18,7 +18,7 @@ class Post
 
         // Check if the file exists
         if (!file_exists($path)) {
-            abort(404);
+            throw new ModelNotFoundException();
         }
 
         return cache()->remember("posts.{$slug}", 1200, fn() =>
