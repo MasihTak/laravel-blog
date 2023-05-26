@@ -45,17 +45,11 @@ class Post
             ));
     }
 
+    /*
+     * Find the post with a slug that matches the one that was requested
+     */
     public static function find($slug)
     {
-        $path = resource_path("posts/{$slug}.html");
-
-        // Check if the file exists
-        if (!file_exists($path)) {
-            throw new ModelNotFoundException();
-        }
-
-        return cache()->remember("posts.{$slug}", 1200, fn() =>
-            file_get_contents($path)
-        );
+       return static::all()->firstWhere('slug', $slug);
     }
 }
